@@ -7,14 +7,14 @@ import { mount } from 'react-mounter';
 
 // App Components
 import Layout from '/imports/ui/Layout.jsx';
-import Chats from '/imports/ui/Chats.jsx';
+import Converstaions from '/imports/ui/Conversations.jsx';
 
 // Routes
 FlowRouter.route('/', {
   name: 'root',
   action() {
     mount(Layout, {
-      content: (<Chats />),
+      content: (<Converstaions />),
     });
   },
 });
