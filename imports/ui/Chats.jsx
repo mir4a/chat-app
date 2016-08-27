@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Moment from 'moment';
+import { _ } from 'underscore';
 
 import Chat from './Chat.jsx';
 
@@ -58,11 +59,18 @@ export default class Chats extends Component {
     }
   }
 
+  deleteChat(chat) {
+    const chats = this.state.chats;
+    chats.splice(chats.indexOf(chat), 1);
+    this.setState({ chats });
+  }
+
   renderChats() {
     return this.state.chats.map((chat) => (
       <Chat
         key={chat._id}
-        chat={chat}/>
+        chat={chat}
+        deleteChat={this.deleteChat.bind(this)} />
     ));
   }
 
