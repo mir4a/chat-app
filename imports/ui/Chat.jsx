@@ -17,8 +17,13 @@ export default class Chat extends Component {
   }
 
   render() {
+    const cardStyles = {
+      marginBottom: 10,
+    };
     return (
-      <Card>
+      <Card
+        style={cardStyles}
+      >
         <CardHeader
           title={this.props.chat.name}
           subtitle={<p>{this.props.chat.lastMessage.text} <b>{this.getTime()}</b></p>}
