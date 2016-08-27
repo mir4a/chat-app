@@ -18,3 +18,20 @@ FlowRouter.route('/', {
     });
   },
 });
+
+const chatRoutes = FlowRouter.group({
+  prefix: '/chats',
+  name: 'chat',
+  triggersEnter: [function(context, redirect) {
+    console.log('running group triggers');
+  }]
+});
+
+chatRoutes.route('/:chatId', {
+  name: 'chat',
+  action() {
+    mount(Layout, {
+      content: (<Conversation />),
+    });
+  },
+});
