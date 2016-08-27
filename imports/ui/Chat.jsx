@@ -7,6 +7,8 @@ import { Card, CardHeader, CardActions } from 'material-ui/Card';
 
 import FlatButton from 'material-ui/FlatButton';
 
+import { FlowRouter } from 'meteor/kadira:flow-router';
+
 export default class Chat extends Component {
 
   render() {
@@ -29,6 +31,10 @@ export default class Chat extends Component {
           <FlatButton
             label="Delete Chat"
             onClick={() => this.props.deleteChat(this.props.chat)}
+          />
+          <FlatButton
+            label="View"
+            onClick={() => FlowRouter.go('chat', { chatId: this.props.chat._id })}
           />
         </CardActions>
       </Card>

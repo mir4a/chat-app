@@ -7,6 +7,7 @@ import { mount } from 'react-mounter';
 
 // App Components
 import Layout from '/imports/ui/Layout.jsx';
+import Conversation from '/imports/ui/Conversation.jsx';
 import Converstaions from '/imports/ui/Conversations.jsx';
 
 // Routes
