@@ -28,6 +28,15 @@ const chatRoutes = FlowRouter.group({
   }]
 });
 
+chatRoutes.route('/', {
+  name: 'chatList',
+  action() {
+    mount(Layout, {
+      content: (<Converstaions />),
+    });
+  },
+});
+
 chatRoutes.route('/:chatId', {
   name: 'chat',
   action() {
