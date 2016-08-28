@@ -9,13 +9,14 @@ import { mount } from 'react-mounter';
 import Layout from '/imports/ui/Layout.jsx';
 import Conversation from '/imports/ui/Conversation.jsx';
 import Converstaions from '/imports/ui/Conversations.jsx';
+import Landing from '/imports/ui/Landing.jsx';
 
 // Routes
 FlowRouter.route('/', {
   name: 'root',
   action() {
     mount(Layout, {
-      content: (<Converstaions />),
+      content: (<Landing />),
     });
   },
 });
