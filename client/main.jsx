@@ -7,6 +7,7 @@ import { mount } from 'react-mounter';
 
 // App Components
 import Layout from '/imports/ui/Layout.jsx';
+import LayoutLanding from '/imports/ui/LayoutLanding.jsx';
 import Conversation from '/imports/ui/Conversation.jsx';
 import Converstaions from '/imports/ui/Conversations.jsx';
 import Landing from '/imports/ui/Landing.jsx';
@@ -15,7 +16,7 @@ import Landing from '/imports/ui/Landing.jsx';
 FlowRouter.route('/', {
   name: 'root',
   action() {
-    mount(Layout, {
+    mount(LayoutLanding, {
       content: (<Landing />),
     });
   },

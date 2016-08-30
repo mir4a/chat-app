@@ -26,7 +26,7 @@ export default class Layout extends Component {
 
   render() {
     return (
-      <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+      <MuiThemeProvider>
         <div>
           <AppBar
             title="Awesome Chat App"
