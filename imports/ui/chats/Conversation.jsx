@@ -11,10 +11,10 @@ import { Chats } from '/imports/api/chats.js';
 import { Messages } from '/imports/api/messages.js';
 
 // Components
-import Message from '/imports/ui/Message.jsx';
+import Message from '/imports/ui/messages/Message.jsx';
 
 // Helpers
-import { getTime } from '/imports/ui/getTime.js';
+import { getTime } from '/imports/ui/shared/getTime.js';
 
 export default class Conversation extends Component {
 

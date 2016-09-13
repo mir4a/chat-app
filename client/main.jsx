@@ -6,17 +6,22 @@ import React from 'react';
 import { mount } from 'react-mounter';
 
 // App Components
-import Layout from '/imports/ui/Layout.jsx';
-import LayoutLanding from '/imports/ui/LayoutLanding.jsx';
-import Conversation from '/imports/ui/Conversation.jsx';
-import Converstaions from '/imports/ui/Conversations.jsx';
-import Landing from '/imports/ui/Landing.jsx';
+import Layout from '/imports/ui/layouts/Layout.jsx';
+import LayoutLanding from '/imports/ui/layouts/LayoutLanding.jsx';
+import GuestLayout from '/imports/ui/layouts/GuestLayout.jsx';
+import Conversation from '/imports/ui/chats/Conversation.jsx';
+import Converstaions from '/imports/ui/chats/Conversations.jsx';
+import Landing from '/imports/ui/pages/Landing.jsx';
+
+// Tap Events Hack
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
 // Routes
 FlowRouter.route('/', {
   name: 'root',
   action() {
-    mount(LayoutLanding, {
+    mount(GuestLayout, {
       content: (<Landing />),
     });
   },

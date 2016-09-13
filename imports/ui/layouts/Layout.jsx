@@ -15,7 +15,6 @@ export default function Layout ({content}) {
       <div>
         <AppBar
           title="Awesome Chat App"
-          iconClassNameRight="muidocs-icon-navigation-expand-more"
           iconElementRight={
             <IconMenu
               iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}

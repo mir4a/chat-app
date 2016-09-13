@@ -1,5 +1,5 @@
 // Helpers
-import { getTime } from '/imports/ui/getTime.js';
+import { getTime } from '/imports/ui/shared/getTime.js';
 
 import React, { Component, PropTypes } from 'react';
 
