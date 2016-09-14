@@ -1,3 +1,5 @@
 import { Mongo } from 'meteor/mongo';
 
-export const Messages = new Mongo.Collection('messages');
+const Messages = new Mongo.Collection('messages');
+
+export default Messages;

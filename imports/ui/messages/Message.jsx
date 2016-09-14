@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 // Helpers
-import { getTime } from '/imports/ui/shared/getTime.js';
+import getTime from '/imports/ui/shared/getTime.js';
 
 export default class Message extends Component {
   render() {
@@ -11,9 +11,9 @@ export default class Message extends Component {
 
     return (
       <div className={messageClass}>
-        <p className='message-text'>
+        <p className="message-text">
           {this.props.message.text}
-          <span className='message-timestamp'>{time}</span>
+          <span className="message-timestamp">{time}</span>
         </p>
       </div>
     );
@@ -21,5 +21,8 @@ export default class Message extends Component {
 }
 
 Message.propTypes = {
-  message: PropTypes.object.isRequired,
+  message: PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    timestamp: PropTypes.instanceOf(Date),
+  }).isRequired,
 };

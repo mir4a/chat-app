@@ -1,5 +1,5 @@
 // Helpers
-import { getTime } from '/imports/ui/shared/getTime.js';
+import getTime from '/imports/ui/shared/getTime.js';
 
 import React, { Component, PropTypes } from 'react';
 
@@ -43,6 +43,11 @@ export default class Chat extends Component {
 }
 
 Chat.propTypes = {
-  chat: PropTypes.object.isRequired,
+  chat: PropTypes.shape({
+    _id: PropTypes.string,
+    name: PropTypes.string,
+    picture: PropTypes.string,
+    lastMessage: PropTypes.object,
+  }).isRequired,
   deleteChat: PropTypes.func.isRequired,
 };

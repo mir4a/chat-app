@@ -1,5 +1,5 @@
 // React Dependencies
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
 // Material-UI
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -9,7 +9,7 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
-export default function Layout ({content}) {
+export default function Layout({ content }) {
   return (
     <MuiThemeProvider>
       <div>
@@ -18,8 +18,8 @@ export default function Layout ({content}) {
           iconElementRight={
             <IconMenu
               iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
-              targetOrigin={{horizontal: 'right', vertical: 'top'}}
-              anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+              targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+              anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
             >
               <MenuItem primaryText="Sign out" />
               <MenuItem primaryText="Help" />
@@ -31,3 +31,7 @@ export default function Layout ({content}) {
     </MuiThemeProvider>
   );
 }
+
+Layout.propTypes = {
+  content: PropTypes.element.isRequired,
+};

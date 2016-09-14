@@ -1,0 +1,55 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "ecmaFeatures": {
+    "jsx": true
+  },
+  "rules": {
+    semi: ["error", "always"],
+    "no-undef": [2],
+    "no-underscore-dangle": 0,
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "react/jsx-no-bind": 0,
+    "react/prefer-stateless-function": 0,
+    "react/no-string-refs": 0,
+    "meteor/audit-argument-checks": 0,
+    "import/export": 0,
+    "meteor/no-session": [
+      0
+    ],
+    import/no-extraneous-dependencies: 0,
+    "import/no-unresolved": 0,
+    "new-cap": [2, { "capIsNewExceptions": ["Moment"] }]
+  },
+  "plugins": [
+    "react",
+    "meteor"
+  ],
+  "globals": {
+    "Meteor": false,
+    "Session": false,
+    "Accounts": false,
+    "Moment": false,
+    "google": false,
+    "FileReader": false,
+    "_": false,
+    "console": false,
+    "Npm": false,
+    "document": false,
+    "Schema": false,
+    "SimpleSchema": false,
+    "serialize": false,
+    "alert": false,
+    "window": false,
+    "MouseEvent": false,
+    "CryptoJS": false,
+    "navigator": false,
+  },
+  "extends": ["eslint:recommended", "airbnb", "plugin:meteor/recommended", "plugin:react/recommended"]
+}
