@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 
 // Api
-import Chats from '/imports/api/chats.js';
+import Chats from '/imports/api/chats';
 
-import Chat from './Chat.jsx';
+import Chat from './Chat';
 
 
 export default class Conversations extends Component {

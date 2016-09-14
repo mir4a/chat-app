@@ -8,14 +8,14 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 
 // API
-import Chats from '/imports/api/chats.js';
-import Messages from '/imports/api/messages.js';
+import Chats from '/imports/api/chats';
+import Messages from '/imports/api/messages';
 
 // Components
-import Message from '/imports/ui/messages/Message.jsx';
+import Message from '/imports/ui/messages/Message';
 
 // Helpers
-import getTime from '/imports/ui/shared/getTime.js';
+import getTime from '/imports/ui/shared/getTime';
 
 export default class Conversation extends Component {
 

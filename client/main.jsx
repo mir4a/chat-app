@@ -6,11 +6,11 @@ import React from 'react';
 import { mount } from 'react-mounter';
 
 // App Components
-import Layout from '/imports/ui/layouts/Layout.jsx';
-import GuestLayout from '/imports/ui/layouts/GuestLayout.jsx';
-import Conversation from '/imports/ui/chats/Conversation.jsx';
-import Converstaions from '/imports/ui/chats/Conversations.jsx';
-import Landing from '/imports/ui/pages/Landing.jsx';
+import Layout from '/imports/ui/layouts/Layout';
+import GuestLayout from '/imports/ui/layouts/GuestLayout';
+import Conversation from '/imports/ui/chats/Conversation';
+import Converstaions from '/imports/ui/chats/Conversations';
+import Landing from '/imports/ui/pages/Landing';
 
 // Tap Events Hack
 import injectTapEventPlugin from 'react-tap-event-plugin';

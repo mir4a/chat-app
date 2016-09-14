@@ -2,8 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 // API
-import Chats from '/imports/api/chats.js';
-import Messages from '/imports/api/messages.js';
+import Chats from '/imports/api/chats';
+import Messages from '/imports/api/messages';
 
 Meteor.methods({
   newMessage(message) {

@@ -1,9 +1,9 @@
 import Moment from 'moment';
 import { Meteor } from 'meteor/meteor';
 
-import Chats from '/imports/api/chats.js';
-import Messages from '/imports/api/messages.js';
-import '/imports/api/server/message_methods.js';
+import Chats from '/imports/api/chats';
+import Messages from '/imports/api/messages';
+import '/imports/api/server/message_methods';
 
 Meteor.startup(() => {
   if (Chats.find().count() !== 0) return;
@@ -61,8 +61,8 @@ Meteor.startup(() => {
   ];
 
   chats.forEach((chat) => {
-    const message = Messages.findOne({ chatId: { $exists: false } });
     let _chat = chat;
+    const message = Messages.findOne({ chatId: { $exists: false } });
     _chat.lastMessage = message;
     const chatId = Chats.insert(_chat);
     Messages.update(message._id, { $set: { chatId } });

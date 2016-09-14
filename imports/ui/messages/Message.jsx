@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 // Helpers
-import getTime from '/imports/ui/shared/getTime.js';
+import getTime from '/imports/ui/shared/getTime';
 
 export default class Message extends Component {
   render() {
