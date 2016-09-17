@@ -1,37 +1,32 @@
-// React Dependencies
-import React, { PropTypes } from 'react';
+// Meteor Dependencies
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
-// Material-UI
+// React Dependencies
+import React from 'react';
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
-import IconButton from 'material-ui/IconButton';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+
+import AccountsUIWrapper from '/imports/ui/shared/AccountsUIWrapper.jsx';
 
 export default function Layout({ content }) {
+  const titleLinkStyles = {
+    textDecoration: 'none',
+    color: 'white',
+  };
+
   return (
     <MuiThemeProvider>
       <div>
         <AppBar
-          title="Awesome Chat App"
-          iconElementRight={
-            <IconMenu
-              iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
-              targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-              anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-            >
-              <MenuItem primaryText="Sign out" />
-              <MenuItem primaryText="Help" />
-            </IconMenu>
+          title={
+            <a style={titleLinkStyles} href={FlowRouter.path('chats')}>Awesome Chat App</a>
           }
+          showMenuIconButton={false}
+          iconElementRight={<AccountsUIWrapper />}
         />
         <div>{content}</div>
       </div>
     </MuiThemeProvider>
   );
 }
-
-Layout.propTypes = {
-  content: PropTypes.element.isRequired,
-};

@@ -1,13 +1,16 @@
 // Meteor Dependencies and collections
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Tracker } from 'meteor/tracker';
+import { Accounts } from 'meteor/accounts-base';
+import '/imports/startup/accounts-config.js';
 
 // React Dependencies
 import React from 'react';
 import { mount } from 'react-mounter';
 
+
 // App Components
 import Layout from '/imports/ui/layouts/Layout';
-import GuestLayout from '/imports/ui/layouts/GuestLayout';
 import Conversation from '/imports/ui/chats/Conversation';
 import Converstaions from '/imports/ui/chats/Conversations';
 import Landing from '/imports/ui/pages/Landing';
@@ -21,7 +24,7 @@ injectTapEventPlugin();
 FlowRouter.route('/', {
   name: 'root',
   action() {
-    mount(GuestLayout, {
+    mount(Layout, {
       content: (<Landing />),
     });
   },
@@ -29,11 +32,13 @@ FlowRouter.route('/', {
 
 const chatRoutes = FlowRouter.group({
   prefix: '/chats',
-  name: 'chat',
+  triggersEnter: [() => {
+    if (!Meteor.userId()) FlowRouter.go('root');
+  }],
 });
 
 chatRoutes.route('/', {
-  name: 'chatList',
+  name: 'chats',
   action() {
     mount(Layout, {
       content: (<Converstaions />),
@@ -48,4 +53,14 @@ chatRoutes.route('/:chatId', {
       content: (<Conversation />),
     });
   },
+});
+
+// triggers
+
+// Login
+Accounts.onLogin(() => FlowRouter.go('chats'));
+
+// Logout
+Tracker.autorun(() => {
+  if (!Meteor.userId()) FlowRouter.go('root');
 });

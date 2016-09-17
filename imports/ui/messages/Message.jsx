@@ -1,28 +1,30 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
 // Helpers
 import getTime from '/imports/ui/shared/getTime';
 
-export default class Message extends Component {
-  render() {
-    const time = getTime(this.props.message.timestamp);
+export default function Message({ message, currentUser }) {
+  const time = getTime(message.timestamp);
+  const messageClass = currentUser._id === message.userId ? 'message-mine' : 'message-other';
+  const messageAuthor = Meteor.users.find(message.userId);
 
-    const messageClass = `message ${_.sample(['message-mine', 'message-other'])}`;
-
-    return (
-      <div className={messageClass}>
-        <p className="message-text">
-          {this.props.message.text}
-          <span className="message-timestamp">{time}</span>
-        </p>
-      </div>
-    );
-  }
+  return (
+    <div className={`message ${messageClass}`}>
+      <p className="message-text">
+        {message.text}
+        <span className="message-timestamp">{time}</span>
+        <br />
+        <small>{messageAuthor.username}</small>
+      </p>
+    </div>
+  );
 }
 
 Message.propTypes = {
   message: PropTypes.shape({
     text: PropTypes.string.isRequired,
     timestamp: PropTypes.instanceOf(Date),
+    userId: PropTypes.string,
   }).isRequired,
+  currentUser: PropTypes.object.isRequired,
 };

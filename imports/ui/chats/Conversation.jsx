@@ -38,8 +38,17 @@ export default class Conversation extends Component {
       <Message
         key={message._id}
         message={message}
+        currentUser={this.props.currentUser}
       />
     ));
+  }
+
+  returnKeyHandler(event) {
+    if (event.key === 'Enter'
+        && !event.shiftKey
+        && event.target.value.trim().length) {
+      this.sendMessage();
+    }
   }
 
   render() {
@@ -81,6 +90,7 @@ export default class Conversation extends Component {
                 rows={1}
                 rowsMax={4}
                 ref="textInput"
+                onKeyUp={this.returnKeyHandler.bind(this)}
               />
               <RaisedButton
                 label="Send"
@@ -106,6 +116,7 @@ Conversation.propTypes = {
   messages: PropTypes.arrayOf(
     PropTypes.shape({})
   ).isRequired,
+  currentUser: PropTypes.object.isRequired,
 };
 
 export default createContainer(() => {
@@ -114,5 +125,6 @@ export default createContainer(() => {
   return {
     chat: Chats.findOne(chatId) || {},
     messages: Messages.find({ chatId }).fetch(),
+    currentUser: Meteor.user(),
   };
 }, Conversation);
