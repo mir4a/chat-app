@@ -114,17 +114,13 @@ export default class Conversation extends Component {
                 <TextField
                   style={textFieldStyles}
                   floatingLabelText="Message"
-                  hintText="Type your message here"
+                  hintText="type your Message and press Return"
                   fullWidth
+                  multiLine
                   rows={1}
-                  rowsMax={1}
+                  rowsMax={2}
                   ref="textInput"
                   onKeyUp={this.returnKeyHandler.bind(this)}
-                />
-                <RaisedButton
-                  label="Send"
-                  primary
-                  onClick={this.sendMessage.bind(this)}
                 />
               </div>
             </CardActions>

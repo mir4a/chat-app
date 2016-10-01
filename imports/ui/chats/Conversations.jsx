@@ -34,11 +34,6 @@ export default class Conversations extends Component {
   }
 
   render() {
-    const buttonStyle = {
-      position: 'fixed',
-      bottom: '10px',
-      left: '50px',
-    };
 
     return (
       <div className="conversations">
@@ -46,7 +41,7 @@ export default class Conversations extends Component {
         <FloatingActionButton
           secondary
           onTouchTap={this.addNewChat}
-          style={buttonStyle}
+          className="addChatButton"
         >
           <ContentAdd />
         </FloatingActionButton>

@@ -15,6 +15,10 @@ export default function Layout({ content }) {
     color: 'white',
   };
 
+  const toggleLeftMenu = () => {
+    $('.conversations').toggleClass('show');
+  };
+
   return (
     <MuiThemeProvider>
       <div>
@@ -22,7 +26,9 @@ export default function Layout({ content }) {
           title={
             <a style={titleLinkStyles} href={FlowRouter.path('chats')}>Awesome Chat App</a>
           }
-          showMenuIconButton={false}
+          showMenuIconButton
+          onLeftIconButtonTouchTap={toggleLeftMenu}
+
           iconElementRight={<AccountsUIWrapper />}
         />
         <div>{content}</div>

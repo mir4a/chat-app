@@ -1,3 +1,4 @@
+@import 'mixin';
 .chatLayout {
   display: flex;
   height: calc(100vh - 64px);
@@ -7,12 +8,36 @@
     width: 300px;
     flex: 0 0 300px;
     overflow: auto;
+
+    @include respondTo(xs) {
+      transition: all 400ms ease;
+      margin-left: -300px;
+
+      .addChatButton {
+        left: -300px;
+      }
+
+      &.show {
+        margin-left: 0;
+        transition: all 400ms ease;
+
+        .addChatButton {
+          left: 50px;
+        }
+      }
+    }
   }
 
   .conversation {
     flex: 1 1 100%;
     overflow: auto;
   }
+}
+
+.addChatButton {
+  position: fixed;
+  bottom: 10px;
+  left: 50px;
 }
 
 .conversations {
@@ -43,6 +68,20 @@
 }
 
 .chatInput {
-  height: 140px;
-  flex: 0 0 140px;
+  height: 86px;
+  flex: 0 0 86px;
+}
+
+
+.chatCardHeader {
+  display: flex;
+  white-space: normal !important;
+
+  > img {
+    flex: 0 0 40px;
+  }
+
+  > div {
+    padding-right: 0 !important;
+  }
 }

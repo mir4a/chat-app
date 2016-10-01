@@ -9,6 +9,8 @@ import FlatButton from 'material-ui/FlatButton';
 
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
+const MESSAGE_MAX_LENGTH = 140;
+
 export default class Chat extends Component {
 
   render() {
@@ -27,8 +29,9 @@ export default class Chat extends Component {
       >
         <CardHeader
           title={this.props.chat.name}
-          subtitle={<p>{message} <b>{time}</b></p>}
+          subtitle={<p>{message.slice(0, MESSAGE_MAX_LENGTH)} <b>{time}</b></p>}
           avatar={this.props.chat.picture}
+          className="chatCardHeader"
         />
         <CardActions>
           <FlatButton
