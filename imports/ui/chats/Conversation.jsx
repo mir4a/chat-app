@@ -13,6 +13,7 @@ import Messages from '/imports/api/messages';
 
 // Components
 import Message from '/imports/ui/messages/Message';
+import Conversations from './Conversations';
 
 // Helpers
 import getTime from '/imports/ui/shared/getTime';
@@ -69,40 +70,43 @@ export default class Conversation extends Component {
     };
 
     return (
-      <div className="container">
-        <Card>
-          <CardHeader
-            title={this.props.chat.name}
-            subtitle={<b>{time}</b>}
-            avatar={this.props.chat.picture}
-          />
-          <CardText>
-            <div className="message-wrapper">
-              {this.renderMessages()}
-            </div>
-          </CardText>
-          <CardActions
-            style={cardActionsStyles}
-          >
-            <div className="message-input">
-              <TextField
-                style={textFieldStyles}
-                floatingLabelText="Message"
-                hintText="Type your message here"
-                multiLine
-                rows={1}
-                rowsMax={4}
-                ref="textInput"
-                onKeyUp={this.returnKeyHandler.bind(this)}
-              />
-              <RaisedButton
-                label="Send"
-                primary
-                onClick={this.sendMessage.bind(this)}
-              />
-            </div>
-          </CardActions>
-        </Card>
+      <div className="chatLayout">
+        <Conversations />
+        <div className="conversation">
+          <Card>
+            <CardHeader
+              title={this.props.chat.name}
+              subtitle={<b>{time}</b>}
+              avatar={this.props.chat.picture}
+            />
+            <CardText>
+              <div className="message-wrapper">
+                {this.renderMessages()}
+              </div>
+            </CardText>
+            <CardActions
+              style={cardActionsStyles}
+            >
+              <div className="message-input">
+                <TextField
+                  style={textFieldStyles}
+                  floatingLabelText="Message"
+                  hintText="Type your message here"
+                  multiLine
+                  rows={1}
+                  rowsMax={4}
+                  ref="textInput"
+                  onKeyUp={this.returnKeyHandler.bind(this)}
+                />
+                <RaisedButton
+                  label="Send"
+                  primary
+                  onClick={this.sendMessage.bind(this)}
+                />
+              </div>
+            </CardActions>
+          </Card>
+        </div>
       </div>
     );
   }

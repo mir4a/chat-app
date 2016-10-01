@@ -36,7 +36,7 @@ export default class Conversations extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="conversations">
         {this.renderChats()}
         <FloatingActionButton
           secondary
