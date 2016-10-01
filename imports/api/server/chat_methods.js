@@ -14,7 +14,7 @@ Meteor.methods({
     const params = {
       timestamp: new Date(),
       userId: this.userId,
-      name: name,
+      name,
       picture: user.avatar,
     };
 
