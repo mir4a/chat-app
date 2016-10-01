@@ -67,24 +67,27 @@ export default class Conversation extends Component {
 
     const cardActionsStyles = {
       borderTop: '1px solid #dddddd',
+      maxHieght: '140px',
     };
 
     return (
       <div className="chatLayout">
         <Conversations />
         <div className="conversation">
-          <Card>
+          <Card className="chatWrapper">
             <CardHeader
+              className="chatHeader"
               title={this.props.chat.name}
               subtitle={<b>{time}</b>}
               avatar={this.props.chat.picture}
             />
-            <CardText>
+            <CardText className="chatBody">
               <div className="message-wrapper">
                 {this.renderMessages()}
               </div>
             </CardText>
             <CardActions
+              className="chatInput"
               style={cardActionsStyles}
             >
               <div className="message-input">
@@ -92,9 +95,9 @@ export default class Conversation extends Component {
                   style={textFieldStyles}
                   floatingLabelText="Message"
                   hintText="Type your message here"
-                  multiLine
+                  fullWidth
                   rows={1}
-                  rowsMax={4}
+                  rowsMax={1}
                   ref="textInput"
                   onKeyUp={this.returnKeyHandler.bind(this)}
                 />

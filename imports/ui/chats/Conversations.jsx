@@ -13,7 +13,6 @@ import Chat from './Chat';
 
 export default class Conversations extends Component {
 
-
   deleteChat(chat) {
     Chats.remove(chat._id);
   }
@@ -35,12 +34,19 @@ export default class Conversations extends Component {
   }
 
   render() {
+    const buttonStyle = {
+      position: 'fixed',
+      bottom: '10px',
+      left: '50px',
+    };
+
     return (
       <div className="conversations">
         {this.renderChats()}
         <FloatingActionButton
           secondary
           onTouchTap={this.addNewChat}
+          style={buttonStyle}
         >
           <ContentAdd />
         </FloatingActionButton>

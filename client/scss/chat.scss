@@ -1,12 +1,46 @@
 .chatLayout {
   display: flex;
+  height: calc(100vh - 64px);
+  overflow: auto;
 
   .conversations {
     width: 300px;
     flex: 0 0 300px;
+    overflow: auto;
   }
 
   .conversation {
     flex: 1 1 100%;
+    overflow: auto;
   }
+}
+
+.conversations {
+  padding-bottom: 80px;
+}
+
+.chatWrapper {
+  height: 100%;
+  overflow: hidden;
+  box-shadow: inset 2px 0 4px rgba(136, 136, 136, 0.15) !important;
+
+  > div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.chatHeader {
+  height: 65px;
+  flex: 0 0 65px;
+}
+
+.chatBody {
+  overflow: auto;
+}
+
+.chatInput {
+  height: 140px;
+  flex: 0 0 140px;
 }
