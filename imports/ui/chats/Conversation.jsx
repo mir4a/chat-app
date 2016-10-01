@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import { FlowRouter } from 'meteor/kadira:flow-router';
@@ -19,6 +20,25 @@ import Conversations from './Conversations';
 import getTime from '/imports/ui/shared/getTime';
 
 export default class Conversation extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
+
+  componentDidMount() {
+    this.scrollToLastMessage();
+  }
+
+  componentDidUpdate() {
+    this.scrollToLastMessage();
+  }
+
+  scrollToLastMessage() {
+    const body = $('.chatBody');
+    const messagesHeight = $('.message-wrapper').height();
+    body.scrollTop(messagesHeight);
+  }
 
   sendMessage() {
     let message = this.refs.textInput.getValue().trim();
@@ -126,7 +146,7 @@ Conversation.propTypes = {
   messages: PropTypes.arrayOf(
     PropTypes.shape({})
   ).isRequired,
-  currentUser: PropTypes.object.isRequired,
+
 };
 
 export default createContainer(() => {

@@ -34,10 +34,12 @@
 .chatHeader {
   height: 65px;
   flex: 0 0 65px;
+  box-shadow: 0 1px 4px rgba(136, 136, 136, 0.15);
 }
 
 .chatBody {
   overflow: auto;
+  height: 100%;
 }
 
 .chatInput {

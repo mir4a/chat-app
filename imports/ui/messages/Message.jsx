@@ -6,7 +6,8 @@ import getTime from '/imports/ui/shared/getTime';
 export default function Message({ message, currentUser }) {
   const time = getTime(message.timestamp);
   const messageClass = currentUser._id === message.userId ? 'message-mine' : 'message-other';
-  const messageAuthor = Meteor.users.find(message.userId);
+  const messageAuthor = Meteor.users.findOne(message.userId);
+  const username = messageAuthor ? messageAuthor.username : 'anonymouse';
 
   return (
     <div className={`message ${messageClass}`}>
@@ -14,7 +15,7 @@ export default function Message({ message, currentUser }) {
         {message.text}
         <span className="message-timestamp">{time}</span>
         <br />
-        <small>{messageAuthor.username}</small>
+        <small>{username}</small>
       </p>
     </div>
   );

@@ -48,9 +48,9 @@ chatRoutes.route('/', {
 
 chatRoutes.route('/:chatId', {
   name: 'chat',
-  action() {
+  action(params) {
     mount(Layout, {
-      content: (<Conversation />),
+      content: (<Conversation chatId={params.chatId} />),
     });
   },
 });
