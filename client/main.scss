@@ -39,7 +39,7 @@ body, html {
     background-color: #fafafa;
   }
 
-  &.message-other::before, &.message-mine::before, {
+  &.message-other::before, &.message-mine::before {
     content: "";
     position: absolute;
     bottom: 3px;

@@ -12,7 +12,7 @@ import { mount } from 'react-mounter';
 // App Components
 import Layout from '/imports/ui/layouts/Layout';
 import Conversation from '/imports/ui/chats/Conversation';
-import Converstaions from '/imports/ui/chats/Conversations';
+import Conversations from '/imports/ui/chats/Conversations';
 import Landing from '/imports/ui/pages/Landing';
 
 // Tap Events Hack
@@ -41,7 +41,7 @@ chatRoutes.route('/', {
   name: 'chats',
   action() {
     mount(Layout, {
-      content: (<Converstaions />),
+      content: (<Conversations />),
     });
   },
 });

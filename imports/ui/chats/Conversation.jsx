@@ -20,8 +20,11 @@ import getTime from '/imports/ui/shared/getTime';
 export default class Conversation extends Component {
 
   sendMessage() {
+    let message = this.refs.textInput.getValue().trim();
+    if (!message.length) return;
+
     Meteor.call('newMessage', {
-      text: this.refs.textInput.getValue().trim(),
+      text: message,
       type: 'text',
       chatId: FlowRouter.current().params.chatId,
       timestamp: new Date(),
@@ -53,8 +56,8 @@ export default class Conversation extends Component {
 
   render() {
     if (_.isEmpty(this.props.chat)) return null; // this is important for page reloads
-
-    const time = getTime(this.props.chat.lastMessage.timestamp);
+    const { lastMessage } = this.props.chat;
+    const time = lastMessage ? getTime(this.props.chat.lastMessage.timestamp) : '';
 
     const textFieldStyles = {
       display: 'block',

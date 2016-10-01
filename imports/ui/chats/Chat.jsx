@@ -16,7 +16,10 @@ export default class Chat extends Component {
       marginBottom: 10,
     };
 
-    const time = getTime(this.props.chat.lastMessage.timestamp);
+    const { lastMessage } = this.props.chat;
+
+    const time = lastMessage ? getTime(this.props.chat.lastMessage.timestamp) : '';
+    const message = lastMessage ? lastMessage.text : 'Empty chat';
 
     return (
       <Card
@@ -24,7 +27,7 @@ export default class Chat extends Component {
       >
         <CardHeader
           title={this.props.chat.name}
-          subtitle={<p>{this.props.chat.lastMessage.text} <b>{time}</b></p>}
+          subtitle={<p>{message} <b>{time}</b></p>}
           avatar={this.props.chat.picture}
         />
         <CardActions>
@@ -43,11 +46,6 @@ export default class Chat extends Component {
 }
 
 Chat.propTypes = {
-  chat: PropTypes.shape({
-    _id: PropTypes.string,
-    name: PropTypes.string,
-    picture: PropTypes.string,
-    lastMessage: PropTypes.object,
-  }).isRequired,
+  chat: PropTypes.object.isRequired,
   deleteChat: PropTypes.func.isRequired,
 };

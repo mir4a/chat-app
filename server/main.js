@@ -4,6 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import Chats from '/imports/api/chats';
 import Messages from '/imports/api/messages';
 import '/imports/api/server/message_methods';
+import '/imports/api/server/chat_methods';
 
 Meteor.startup(() => {
   if (Chats.find().count() !== 0) return;
@@ -62,7 +63,7 @@ Meteor.startup(() => {
 
   chats.forEach((chat) => {
     const message = Messages.findOne({ chatId: { $exists: false } });
-    let _chat = Object.assign({ lastMessage: message }, chat);
+    const _chat = Object.assign({ lastMessage: message }, chat);
     const chatId = Chats.insert(_chat);
     Messages.update(message._id, { $set: { chatId } });
   });
