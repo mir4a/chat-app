@@ -16,6 +16,7 @@ Meteor.methods({
       chatId: String,
       type: String,
       timestamp: Date,
+      links: Array,
     });
 
     const params = {

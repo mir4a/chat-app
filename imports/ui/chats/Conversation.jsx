@@ -5,7 +5,6 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 
 // API
@@ -18,6 +17,7 @@ import Conversations from './Conversations';
 
 // Helpers
 import getTime from '/imports/ui/shared/getTime';
+import { getUrls } from '/imports/helpers/url';
 
 export default class Conversation extends Component {
   constructor(props) {
@@ -43,12 +43,14 @@ export default class Conversation extends Component {
   sendMessage() {
     let message = this.refs.textInput.getValue().trim();
     if (!message.length) return;
+    let links = getUrls(message);
 
     Meteor.call('newMessage', {
       text: message,
       type: 'text',
       chatId: FlowRouter.current().params.chatId,
       timestamp: new Date(),
+      links,
     });
 
     // Clear form

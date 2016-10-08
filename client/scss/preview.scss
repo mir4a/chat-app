@@ -1,0 +1,7 @@
+.link-preview {
+  &:before {
+    content: 'preview:';
+    display: table;
+    width: 100%;
+  }
+}
