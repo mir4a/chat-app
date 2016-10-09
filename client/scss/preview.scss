@@ -1,7 +1,69 @@
+@import 'colors';
+
+.preview-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  .message-mine & {
+    justify-content: flex-end;
+  }
+}
+
 .link-preview {
+  padding: 3px;
+  border-radius: 10px;
+
+  &.error {
+    background: red !important;
+
+    &::after {
+      content: 'error';
+    }
+  }
+
+  .message-mine & {
+    background: $mine-message-bg;
+  }
+
+  &:hover {
+    background: yellow;
+  }
+
   &:before {
-    content: 'preview:';
+    content: '';
     display: table;
     width: 100%;
+  }
+
+  .preview-block {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+    background: #dedede;
+    border-radius: 8px;
+    padding: 10px;
+
+    h3 {
+      text-decoration: underline;
+      word-break: break-word;
+    }
+
+    img {
+      font-size: 9px;
+      display: block;
+      width: 100%;
+      height: auto;
+      word-break: break-all;
+    }
+
+    p {
+      font-size: 12px;
+      color: #777;
+      word-break: break-word;
+    }
   }
 }

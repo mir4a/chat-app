@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "bcrypt": "^0.8.7",
+    "lets-get-meta": "^1.0.0",
     "material-ui": "^0.15.4",
     "meteor-node-stubs": "~0.2.0",
     "moment": "^2.14.1",

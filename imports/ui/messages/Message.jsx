@@ -1,22 +1,26 @@
 import React, { PropTypes } from 'react';
 
-import Preview from './Preview';
-
 // Helpers
 import getTime from '/imports/ui/shared/getTime';
+
+import Preview from './Preview';
 
 export default function Message({ message, currentUser }) {
   const time = getTime(message.timestamp);
   const messageClass = currentUser._id === message.userId ? 'message-mine' : 'message-other';
   const messageAuthor = Meteor.users.findOne(message.userId);
   const username = messageAuthor ? messageAuthor.username : 'anonymouse';
+
   const preview = message.links && message.links.length ?
-    <Preview links={message.links} /> : '';
+        message.links.map(link => (
+          <Preview link={link} key={link} />
+        ))
+      : '';
 
 
   return (
-    <div className="clearfix">
-      <div className={`message ${messageClass}`}>
+    <div className={messageClass}>
+      <div className="message">
         <p className="message-text">
           {message.text}
           <br />
@@ -25,7 +29,10 @@ export default function Message({ message, currentUser }) {
           <small>{username}</small>
         </p>
       </div>
-      {preview}
+      <div className="clearfix" />
+      <div className="preview-list">
+        {preview}
+      </div>
 
     </div>
   );

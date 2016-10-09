@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { HTTP } from 'meteor/http';
 import { check } from 'meteor/check';
 
 // API
@@ -28,5 +29,9 @@ Meteor.methods({
     Chats.update(message.chatId, { $set: { lastMessage: message } });
 
     return messageId;
+  },
+
+  remoteGet(url) {
+    return HTTP.get(url);
   },
 });
