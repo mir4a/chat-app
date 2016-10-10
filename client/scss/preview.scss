@@ -5,6 +5,7 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
+  margin-bottom: 40px;
 
   .message-mine & {
     justify-content: flex-end;
@@ -12,8 +13,13 @@
 }
 
 .link-preview {
+  width: 320px;
+  height: 320px;
   padding: 3px;
+  background: $others-message-bg;
   border-radius: 10px;
+  box-shadow: 0 1px 1px #777;
+  box-sizing: border-box;
 
   &.error {
     background: red !important;
@@ -25,10 +31,17 @@
 
   .message-mine & {
     background: $mine-message-bg;
+    box-shadow: 0 1px 1px darken($mine-message-bg, 5%);
   }
 
   &:hover {
     background: yellow;
+
+    .preview-block {
+      h3 {
+        background: yellow;
+      }
+    }
   }
 
   &:before {
@@ -39,31 +52,62 @@
 
   .preview-block {
     text-decoration: none;
-    display: block;
-    width: 100%;
-    height: auto;
-    max-width: 300px;
-    background: #dedede;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 314px;
+    height: 314px;
+    position: relative;
+    background: #fff;
     border-radius: 8px;
-    padding: 10px;
 
     h3 {
-      text-decoration: underline;
+      text-decoration: none;
       word-break: break-word;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 14px;
+      padding: 5px 6px;
+      margin: 0;
+      background: $others-message-bg;
+      border-radius: 7px 7px 0 0;
+
+      .message-min & {
+        background: $mine-message-bg;
+      }
     }
 
     img {
       font-size: 9px;
       display: block;
-      width: 100%;
+      width: auto;
       height: auto;
+      max-width: 100%;
+      max-height: 255px;
+      margin: 0 auto;
       word-break: break-all;
     }
 
     p {
-      font-size: 12px;
+      font-size: 10px;
       color: #777;
       word-break: break-word;
+      height: 29px;
+      padding: 4px 7px 0;
+      margin: 0;
+      overflow: hidden;
+      background: #fff;
+      box-sizing: border-box;
+      border-radius: 0 0 7px 7px;
+    }
+
+    .icon-link {
+      position: absolute;
+      top: 1px;
+      right: 0;
+      border-radius: 10px;
+      background: #FFF;
     }
   }
 }
