@@ -1,5 +1,5 @@
-const urlRegexp = /((https?|ftp):\/\/|www\.)[^\s/$.?#].[^\s]*/ig;
 const getUrls = (message) => {
+  const urlRegexp = /((https?|ftp):\/\/|www\.)[^\s/$.?#].[^\s]*/ig;
   const spaceSplit = message.split(' ');
   const urls = [];
 
