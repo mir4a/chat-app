@@ -41,7 +41,6 @@ export default function Layout({ content }) {
           }
           showMenuIconButton
           onLeftIconButtonTouchTap={toggleLeftMenu}
-
           iconElementRight={<AccountsUIWrapper />}
         />
         <div>{content}</div>

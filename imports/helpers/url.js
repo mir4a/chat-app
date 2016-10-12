@@ -5,7 +5,11 @@ const getUrls = (message) => {
 
   spaceSplit.forEach((str) => {
     if (urlRegexp.test(str)) {
-      urls.push(str);
+      let url = str;
+      if (str.indexOf('http')) {
+        url = `http://${str}`;
+      }
+      urls.push(url);
     }
   });
 

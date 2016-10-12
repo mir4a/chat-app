@@ -11,11 +11,12 @@ export default function Message({ message, currentUser }) {
   const messageAuthor = Meteor.users.findOne(message.userId);
   const username = messageAuthor ? messageAuthor.username : 'anonymouse';
 
-  const preview = message.links && message.links.length ?
-        message.links.map(link => (
-          <Preview link={link} key={link} />
-        ))
-      : '';
+  const preview = message.links && message.links.length
+    ?
+      message.links.map(link => (
+        <Preview link={link} key={link} />
+      ))
+    : '';
 
 
   return (

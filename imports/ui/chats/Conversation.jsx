@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import { FlowRouter } from 'meteor/kadira:flow-router';
@@ -13,7 +12,7 @@ import Messages from '/imports/api/messages';
 
 // Components
 import Message from '/imports/ui/messages/Message';
-import Conversations from './Conversations';
+import Conversations from '/imports/ui/chats/Conversations';
 
 // Helpers
 import getTime from '/imports/ui/shared/getTime';
