@@ -72,9 +72,9 @@ export default class Preview extends Component {
     const error = this.state.error ? 'error' : '';
     const loading = this.state.loading
       ? (
-          <span className="preview-block loading">
-            <Spinner />
-          </span>
+        <span className="preview-block loading">
+          <Spinner />
+        </span>
         )
       : (
         <a href={link} target="_blank" style={style} className="preview-block">

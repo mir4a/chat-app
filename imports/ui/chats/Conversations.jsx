@@ -14,7 +14,7 @@ import Chat from './Chat';
 export default class Conversations extends Component {
 
   deleteChat(chat) {
-    Chats.remove(chat._id);
+    Meteor.call('deleteChat', chat._id);
   }
 
   addNewChat() {

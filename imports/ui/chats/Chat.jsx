@@ -18,10 +18,16 @@ export default class Chat extends Component {
       marginBottom: 10,
     };
 
-    const { lastMessage } = this.props.chat;
+    const { lastMessage, userId } = this.props.chat;
 
     const time = lastMessage ? getTime(this.props.chat.lastMessage.timestamp) : '';
     const message = lastMessage ? lastMessage.text : 'Empty chat';
+    const deleteButton = userId === Meteor.userId()
+      ? (<FlatButton
+          label="Delete Chat"
+          onClick={() => this.props.deleteChat(this.props.chat)}
+        />)
+      : '';
 
     return (
       <Card
@@ -34,10 +40,7 @@ export default class Chat extends Component {
           className="chatCardHeader"
         />
         <CardActions>
-          <FlatButton
-            label="Delete Chat"
-            onClick={() => this.props.deleteChat(this.props.chat)}
-          />
+          {deleteButton}
           <FlatButton
             label="View"
             onClick={() => FlowRouter.go('chat', { chatId: this.props.chat._id })}

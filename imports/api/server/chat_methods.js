@@ -22,4 +22,13 @@ Meteor.methods({
 
     return chatId;
   },
+
+  deleteChat(chatId) {
+    const chat = Chats.findOne(chatId);
+    if (chat.userId !== this.userId) {
+      throw new Meteor.Error('not-access', 'You have no rights for delete chat other user\'s chat');
+    }
+
+    Chats.remove(chatId);
+  },
 });
