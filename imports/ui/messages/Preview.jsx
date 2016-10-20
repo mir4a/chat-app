@@ -25,6 +25,10 @@ export default class Preview extends Component {
     this.getLinkData(this.props.link);
   }
 
+  componentWillUnmount() {
+    console.log('preview will unmount');
+  }
+
   getLinkData(link) {
     this.setState({
       loading: true,
@@ -38,7 +42,6 @@ export default class Preview extends Component {
       }
       const meta = getMeta(response.content);
 
-      console.log(response);
       console.log(meta);
       // TODO: Check content type, if image then add link to src
       this.setState({

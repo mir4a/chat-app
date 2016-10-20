@@ -88,7 +88,7 @@ export default class Conversations extends Component {
 Conversations.propTypes = {
   loading: PropTypes.bool,
   chats: PropTypes.arrayOf(PropTypes.object).isRequired,
-  users: PropTypes.arrayOf(PropTypes.shape({})),
+  users: PropTypes.shape({}),
 };
 
 export default createContainer(() => {

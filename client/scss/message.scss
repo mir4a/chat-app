@@ -1,7 +1,11 @@
 @import 'colors';
 
 .message-wrapper {
-  margin-bottom: 9px;
+  line-height: 1.5;
+  padding: 15px;
+  min-height: calc(100% - 30px);
+  background: #FFF url(/images/geometry.png) repeat;
+  box-shadow: inset 2px 0 4px rgba(136, 136, 136, 0.15) !important;
 
   &::after {
     content: "";
@@ -13,9 +17,9 @@
 .initialMessage {
   text-align: center;
   font-size: 12px;
-  color: #7e9ea2;
+  color: #366990;
   padding: 10px;
-  background: #effafb;
+  background: rgba(0, 191, 255, 0.1);
   margin: -16px -16px 20px;
 
   &:empty {
@@ -36,13 +40,10 @@
   .message-other &, .message-mine & {
     &::before {
       content: "";
+      width: 0;
+      height: 0;
       position: absolute;
-      bottom: 3px;
-      width: 12px;
-      height: 19px;
-      background-position: 50% 50%;
-      background-repeat: no-repeat;
-      background-size: contain;
+      bottom: 4px;
     }
   }
 
@@ -51,24 +52,33 @@
     background-color: $mine-message-bg;
 
     &::before {
-      right: -11px;
-      background-image: url(/message-mine.png)
+      right: -10px;
+      border: {
+        color: transparent transparent transparent $mine-message-bg;
+        width: 10px 0 0 11px;
+        style: solid;
+      }
     }
   }
 
   .message-other & {
     float: left;
-    background-color: #fafafa;
+    background-color: $others-message-bg;
 
     &::before {
-      left: -11px;
-      background-image: url(/message-other.png)
+      left: -10px;
+      border: {
+        color: transparent $others-message-bg transparent transparent;
+        width: 10px 11px 0 0;
+        style: solid;
+      }
     }
   }
 
   .message-text {
     color: #333;
     padding: 5px 7px;
+    margin: 0;
     word-wrap: break-word;
     white-space: pre-line;
 
@@ -76,14 +86,20 @@
       content: " \00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
       display: inline;
     }
+
+    small {
+      display: inline-block;
+      margin-top: 10px;
+    }
   }
 
   .message-timestamp {
+    font-size: 11px;
+    font-style: italic;
+    color: gray;
     position: absolute;
     bottom: 2px;
     right: 7px;
-    color: gray;
-    font-size: 12px;
   }
 }
 

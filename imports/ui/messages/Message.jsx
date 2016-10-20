@@ -26,7 +26,6 @@ export default function Message({ message, currentUser }) {
           {message.text}
           <br />
           <span className="message-timestamp">{time}</span>
-          <br />
           <small>{username}</small>
         </p>
       </div>
