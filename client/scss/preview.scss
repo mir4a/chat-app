@@ -7,6 +7,10 @@
   align-items: flex-start;
   margin-bottom: 40px;
 
+  &:empty {
+    display: none;
+  }
+
   .message-mine & {
     justify-content: flex-end;
   }

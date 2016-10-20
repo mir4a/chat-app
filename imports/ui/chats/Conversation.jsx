@@ -104,6 +104,9 @@ export default class Conversation extends Component {
             />
             <CardText className="chatBody">
               <div className="message-wrapper">
+                <div className="initialMessage">
+                  {this.props.chat.initialMessage}
+                </div>
                 {this.renderMessages()}
               </div>
             </CardText>
