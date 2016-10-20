@@ -1,20 +1,28 @@
 import { Meteor } from 'meteor/meteor';
-
+import { check } from 'meteor/check';
 // API
 import Chats from '/imports/api/chats';
 
 Meteor.methods({
-  newChat(name) {
+  newChat(chat) {
     if (!this.userId) {
       throw new Meteor.Error('not-logged-in', 'Must be logged in to create a chat.');
     }
+
+    check(chat, {
+      chatTitle: String,
+      chatWithUser: String,
+      initialMessage: String,
+    });
 
     const user = Meteor.user();
 
     const params = {
       timestamp: new Date(),
       userId: this.userId,
-      name,
+      name: chat.chatTitle,
+      users: [this.userId, chat.chatWithUser],
+      initialMessage: chat.initialMessage,
       picture: user.avatar,
     };
 

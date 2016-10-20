@@ -20,4 +20,9 @@ body, html {
   margin: 25px;
 }/* CSS declarations go here */
 
+.mainWrapper {
+  height: calc(100vh - 64px);
+  overflow: auto;
+}
+
 @import 'scss/index';

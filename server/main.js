@@ -5,6 +5,7 @@ import Chats from '/imports/api/chats';
 import Messages from '/imports/api/messages';
 import '/imports/api/server/message_methods';
 import '/imports/api/server/chat_methods';
+import '/imports/api/server/user_methods';
 
 Meteor.startup(() => {
   if (Chats.find().count() !== 0) return;

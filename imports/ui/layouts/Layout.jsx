@@ -43,7 +43,7 @@ export default function Layout({ content }) {
           onLeftIconButtonTouchTap={toggleLeftMenu}
           iconElementRight={<AccountsUIWrapper />}
         />
-        <div>{content}</div>
+        <main className="mainWrapper">{content}</main>
       </div>
     </MuiThemeProvider>
   );
