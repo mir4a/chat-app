@@ -7,6 +7,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
+import Snackbar from '/imports/ui/shared/Snackbar';
+
 // Api
 import Chats from '/imports/api/chats';
 import UsersList from '/imports/ui/users/UsersList';
@@ -55,6 +57,8 @@ export default class Conversations extends Component {
       newChatModalOpened,
     } = this.state;
     const {
+      disconnected,
+      connecting,
       loading,
       users,
     } = this.props;
@@ -66,6 +70,14 @@ export default class Conversations extends Component {
           users={users}
           toggleNewChatModal={this.toggleNewChatModal}
         />
+      : '';
+
+    const connectSnack = connecting
+      ? <Snackbar message="Connecting" />
+      : '';
+
+    const disconnectSnack = disconnected
+      ? <Snackbar message="Connection lost..." />
       : '';
 
     return (
@@ -80,6 +92,8 @@ export default class Conversations extends Component {
           <ContentAdd />
         </FloatingActionButton>
         {newChat}
+        {connectSnack}
+        {disconnectSnack}
       </div>
     );
   }
@@ -87,15 +101,20 @@ export default class Conversations extends Component {
 
 Conversations.propTypes = {
   loading: PropTypes.bool,
+  disconnected: PropTypes.bool,
+  connecting: PropTypes.bool,
   chats: PropTypes.arrayOf(PropTypes.object).isRequired,
   users: PropTypes.shape({}),
 };
+
 
 export default createContainer(() => {
   const usersHandler = Meteor.subscribe('usersList');
   const chatsHandler = Meteor.subscribe('chatList');
   return {
     loading: !(usersHandler.ready()) && !(chatsHandler.ready()),
+    disconnected: !Meteor.status().connected,
+    connecting: Meteor.status().connecting,
     // NOTE: Why I should use query in views instead of server visible code?
     chats: Chats.find({ users: Meteor.userId() }).fetch(),
     users: Meteor.users.find({}),
