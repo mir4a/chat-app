@@ -40,3 +40,7 @@ Meteor.methods({
     Chats.remove(chatId);
   },
 });
+
+Meteor.publish('chatList', () => {
+  Chats.find({});
+});

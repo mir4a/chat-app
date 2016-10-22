@@ -93,9 +93,11 @@ Conversations.propTypes = {
 
 export default createContainer(() => {
   const usersHandler = Meteor.subscribe('usersList');
+  const chatsHandler = Meteor.subscribe('chatList');
   return {
-    loading: !(usersHandler.ready()),
-    chats: Chats.find({}).fetch(),
+    loading: !(usersHandler.ready()) && !(chatsHandler.ready()),
+    // NOTE: Why I should use query in views instead of server visible code?
+    chats: Chats.find({ users: Meteor.userId() }).fetch(),
     users: Meteor.users.find({}),
   };
 }, Conversations);
