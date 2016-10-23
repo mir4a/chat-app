@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
+
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 
@@ -13,6 +14,7 @@ import Messages from '/imports/api/messages';
 // Components
 import Message from '/imports/ui/messages/Message';
 import Conversations from '/imports/ui/chats/Conversations';
+import Spinner from '/imports/ui/shared/Spinner';
 
 // Helpers
 import getTime from '/imports/ui/shared/getTime';
@@ -78,7 +80,10 @@ export default class Conversation extends Component {
 
   render() {
     if (_.isEmpty(this.props.chat)) return null; // this is important for page reloads
-    const { lastMessage } = this.props.chat;
+    const {
+      lastMessage,
+      loadingMessages,
+    } = this.props.chat;
     const time = lastMessage ? getTime(this.props.chat.lastMessage.timestamp) : '';
 
     const textFieldStyles = {
@@ -86,13 +91,15 @@ export default class Conversation extends Component {
       marginBottom: 10,
     };
 
+    const loadingClass = loadingMessages ? 'loading' : '';
+
     const cardActionsStyles = {
       borderTop: '1px solid #dddddd',
       maxHieght: '140px',
     };
 
     return (
-      <div className="chatLayout">
+      <div className={'chatLayout ' + loadingClass}>
         <Conversations />
         <div className="conversation">
           <Card className="chatWrapper">
@@ -136,6 +143,7 @@ export default class Conversation extends Component {
 }
 
 Conversation.propTypes = {
+  loadingMessages: PropTypes.bool,
   chat: PropTypes.shape({
     name: PropTypes.string,
     picture: PropTypes.string,
@@ -151,8 +159,11 @@ Conversation.propTypes = {
 
 export default createContainer(() => {
   const chatId = FlowRouter.current().params.chatId;
+  const messagesHandler = Meteor.subscribe('chatMessages');
+  const chatsHandler = Meteor.subscribe('chatList');
 
   return {
+    loadingMessages: !(messagesHandler.ready()),
     chat: Chats.findOne(chatId) || {},
     messages: Messages.find({ chatId }).fetch(),
     currentUser: Meteor.user(),

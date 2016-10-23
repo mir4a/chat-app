@@ -41,6 +41,6 @@ Meteor.methods({
   },
 });
 
-Meteor.publish('chatList', () => {
-  Chats.find({});
+Meteor.publish('chatList', function userChats() {
+  return Chats.find({ users: this.userId });
 });

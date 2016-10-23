@@ -104,7 +104,7 @@ Conversations.propTypes = {
   disconnected: PropTypes.bool,
   connecting: PropTypes.bool,
   chats: PropTypes.arrayOf(PropTypes.object).isRequired,
-  users: PropTypes.shape({}),
+  users: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
 
@@ -112,11 +112,10 @@ export default createContainer(() => {
   const usersHandler = Meteor.subscribe('usersList');
   const chatsHandler = Meteor.subscribe('chatList');
   return {
-    loading: !(usersHandler.ready()) && !(chatsHandler.ready()),
+    loading: !(usersHandler.ready() && chatsHandler.ready()),
     disconnected: !Meteor.status().connected,
     connecting: Meteor.status().connecting,
-    // NOTE: Why I should use query in views instead of server visible code?
-    chats: Chats.find({ users: Meteor.userId() }).fetch(),
-    users: Meteor.users.find({}),
+    chats: Chats.find().fetch(),
+    users: Meteor.users.find({ _id: { $ne: Meteor.userId() }}).fetch(),
   };
 }, Conversations);

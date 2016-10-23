@@ -41,3 +41,5 @@ Meteor.methods({
     return HTTP.get(url, { headers, npmRequestOptions: { gzip: true } });
   },
 });
+
+Meteor.publish('chatMessages', () => Messages.find());

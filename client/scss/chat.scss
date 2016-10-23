@@ -4,6 +4,10 @@
   height: calc(100vh - 64px);
   overflow: auto;
 
+  &.loading {
+    opacity: 0.3;
+  }
+
   .conversations {
     width: 300px;
     flex: 0 0 300px;
@@ -67,6 +71,7 @@
   overflow: auto;
   height: 100%;
   padding: 0 !important;
+  background: #FFF url(/images/geometry.png) repeat;
 }
 
 .chatInput {
