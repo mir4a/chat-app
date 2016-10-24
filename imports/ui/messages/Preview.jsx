@@ -5,6 +5,8 @@ import IconLink from 'material-ui/svg-icons/content/link';
 
 import getMeta from 'lets-get-meta';
 
+import log from '/lib/logger';
+
 import Spinner from '/imports/ui/shared/Spinner';
 
 export default class Preview extends Component {
@@ -34,10 +36,12 @@ export default class Preview extends Component {
       loading: true,
     });
     Meteor.call('remoteGet', link, (err, response) => {
+      log.info('Get preview link', {url: link});
       if (err) {
         this.setState({
           error: true,
         });
+        log.error(err);
         throw new Error(err);
       }
       const meta = getMeta(response.content);

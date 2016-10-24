@@ -25,3 +25,6 @@ check@1.2.3
 accounts-ui@1.1.9
 accounts-password@1.3.0
 http@1.2.9_1
+ostrio:logger
+ostrio:loggerfile
+ostrio:loggerconsole

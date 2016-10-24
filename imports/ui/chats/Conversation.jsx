@@ -7,6 +7,8 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 
+import log from '/lib/logger';
+
 // API
 import Chats from '/imports/api/chats';
 import Messages from '/imports/api/messages';
@@ -61,7 +63,9 @@ export default class Conversation extends Component {
 
 
   renderMessages() {
-    return this.props.messages.map(message => (
+    const { messages } = this.props;
+    log.debug(`here is messages (length: ${messages.length})`, {messages: messages});
+    return messages.map(message => (
       <Message
         key={message._id}
         message={message}
@@ -159,13 +163,13 @@ Conversation.propTypes = {
 
 export default createContainer(() => {
   const chatId = FlowRouter.current().params.chatId;
-  const messagesHandler = Meteor.subscribe('chatMessages');
+  const messagesHandler = Meteor.subscribe('chatMessages', { chatId: chatId });
   const chatsHandler = Meteor.subscribe('chatList');
 
   return {
     loadingMessages: !(messagesHandler.ready()),
     chat: Chats.findOne(chatId) || {},
-    messages: Messages.find({ chatId }).fetch(),
+    messages: Messages.find({}, {sort: { timestamp: 1 }}).fetch(),
     currentUser: Meteor.user(),
   };
 }, Conversation);

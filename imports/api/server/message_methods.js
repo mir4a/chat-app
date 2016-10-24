@@ -2,6 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { HTTP } from 'meteor/http';
 import { check } from 'meteor/check';
 
+import log from '/lib/logger';
+
 // API
 import Chats from '/imports/api/chats';
 import Messages from '/imports/api/messages';
@@ -42,4 +44,9 @@ Meteor.methods({
   },
 });
 
-Meteor.publish('chatMessages', () => Messages.find());
+Meteor.publish('chatMessages', (params) => {
+  const { chatId } = params;
+  log.info('get messages for the chat', chatId);
+  // FIXME: Implement scroll pagination for chat
+  return Messages.find({ chatId }, { limit: 100, sort: { timestamp: -1 } });
+});

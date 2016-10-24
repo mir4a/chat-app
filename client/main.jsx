@@ -8,6 +8,7 @@ import '/imports/startup/accounts-config.js';
 import React from 'react';
 import { mount } from 'react-mounter';
 
+import log from '/lib/logger';
 
 // App Components
 import Layout from '/imports/ui/layouts/Layout';
@@ -55,7 +56,17 @@ chatRoutes.route('/:chatId', {
   },
 });
 
-// triggers
+
+/* Store original window.onerror */
+const _WoE = window.onerror;
+
+window.onerror = (msg, url, line) => {
+  log.error(msg, { file: url, onLine: line });
+  if (_WoE) {
+    /* eslint:disable prefer-rest-params */
+    _WoE.apply(this, arguments);
+  }
+};
 
 // Login
 Accounts.onLogin(() => FlowRouter.go('chats'));
