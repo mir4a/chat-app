@@ -2,7 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-
+import {
+  AutoSizer,
+  List,
+  CellMeasurer,
+  defaultCellMeasurerCellSizeCache as CellSizeCache,
+} from 'react-virtualized';
 
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
@@ -21,6 +26,13 @@ import Spinner from '/imports/ui/shared/Spinner';
 // Helpers
 import getTime from '/imports/ui/shared/getTime';
 import { getUrls } from '/imports/helpers/url';
+
+// Column widths vary but row heights are uniform
+const cellSizeCache = new CellSizeCache({
+  uniformRowHeight: true,
+  uniformColumnWidth: false
+})
+
 
 export default class Conversation extends Component {
   constructor(props) {
@@ -74,6 +86,21 @@ export default class Conversation extends Component {
     ));
   }
 
+  cellRenderer(params) {
+    params.index = params.rowIndex
+
+    return this.rowRenderer(params);
+  }
+
+  rowRenderer({ key, index, style }) {
+    const { messages } = this.props;
+    return (
+      <div key={key} style={style}>
+        {messages[index].text}
+      </div>
+    );
+  }
+
   returnKeyHandler(event) {
     if (event.key === 'Enter'
         && !event.shiftKey
@@ -88,6 +115,9 @@ export default class Conversation extends Component {
       lastMessage,
       loadingMessages,
     } = this.props.chat;
+    const {
+      messages,
+    } = this.props;
     const time = lastMessage ? getTime(this.props.chat.lastMessage.timestamp) : '';
 
     const textFieldStyles = {
@@ -118,7 +148,39 @@ export default class Conversation extends Component {
                 <div className="initialMessage">
                   {this.props.chat.initialMessage}
                 </div>
-                {this.renderMessages()}
+
+                  <AutoSizer style={{margin: '-15px'}}>
+                    {(autoSizerParams) => {
+                      let mostRecentWidth, cellMeasurer, list;
+                      if (mostRecentWidth && mostRecentWidth !== autoSizerParams.width) {
+                        cellMeasurer.resetMeasurements()
+                        list.recomputeRowHeights()
+                      }
+
+                      mostRecentWidth = autoSizerParams.width
+
+                      return (
+                      <CellMeasurer
+                        cellRenderer={this.cellRenderer.bind(this)}
+                        columnCount={1}
+                        ref={(ref) => { cellMeasurer = ref }}
+                        rowCount={messages.length}
+                        width={autoSizerParams.width}
+                      >
+                        {( cellMeasurerParams ) => (
+                          <List
+                            height={autoSizerParams.height}
+                            ref={(ref) => { list = ref }}
+                            rowCount={messages.length}
+                            rowHeight={cellMeasurerParams.getRowHeight}
+                            rowRenderer={this.rowRenderer.bind(this)}
+                            width={autoSizerParams.width}
+                          />
+                        )}
+                      </CellMeasurer>
+                    )}}
+                  </AutoSizer>
+
               </div>
             </CardText>
             <CardActions

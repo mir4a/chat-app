@@ -48,5 +48,5 @@ Meteor.publish('chatMessages', (params) => {
   const { chatId } = params;
   log.info('get messages for the chat', chatId);
   // FIXME: Implement scroll pagination for chat
-  return Messages.find({ chatId }, { limit: 100, sort: { timestamp: -1 } });
+  return Messages.find({ chatId }, { limit: 200, sort: { timestamp: -1 } });
 });
