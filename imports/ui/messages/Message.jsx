@@ -25,7 +25,7 @@ export default function Message({ message, currentUser }) {
         <p className="message-text">
           {message.text}
           <br />
-          <span className="message-timestamp">{time}</span>
+          <span className="message-timestamp" title={message.timestamp}>{time}</span>
           <small>{username}</small>
         </p>
       </div>

@@ -51,8 +51,15 @@ export default class Conversation extends Component {
 
   scrollToLastMessage() {
     const body = $('.chatBody');
-    const messagesHeight = $('.message-wrapper').height();
-    body.scrollTop(messagesHeight);
+    // const messagesHeight = $('.ReactVirtualized__Grid__innerScrollContainer').height();
+    // body.scrollTop(messagesHeight);
+  }
+
+  onScroll({ overscanStartIndex, overscanStopIndex, startIndex, stopIndex }) {
+    if (overscanStopIndex >= 199) {
+      // TODO: DO the paginate shit here
+    }
+
   }
 
   sendMessage() {
@@ -96,7 +103,10 @@ export default class Conversation extends Component {
     const { messages } = this.props;
     return (
       <div key={key} style={style}>
-        {messages[index].text}
+        <Message
+          message={messages[index]}
+          currentUser={this.props.currentUser}
+        />
       </div>
     );
   }
@@ -144,22 +154,24 @@ export default class Conversation extends Component {
               avatar={this.props.chat.picture}
             />
             <CardText className="chatBody">
+              {/*
+              * FIXME: Do something with initial message
+              */}
+              <div className="initialMessage" style={{display: 'none'}}>
+                {this.props.chat.initialMessage}
+              </div>
               <div className="message-wrapper">
-                <div className="initialMessage">
-                  {this.props.chat.initialMessage}
-                </div>
+                <AutoSizer>
+                  {(autoSizerParams) => {
+                    let mostRecentWidth, cellMeasurer, list;
+                    if (mostRecentWidth && mostRecentWidth !== autoSizerParams.width) {
+                      cellMeasurer.resetMeasurements()
+                      list.recomputeRowHeights()
+                    }
 
-                  <AutoSizer style={{margin: '-15px'}}>
-                    {(autoSizerParams) => {
-                      let mostRecentWidth, cellMeasurer, list;
-                      if (mostRecentWidth && mostRecentWidth !== autoSizerParams.width) {
-                        cellMeasurer.resetMeasurements()
-                        list.recomputeRowHeights()
-                      }
+                    mostRecentWidth = autoSizerParams.width
 
-                      mostRecentWidth = autoSizerParams.width
-
-                      return (
+                    return (
                       <CellMeasurer
                         cellRenderer={this.cellRenderer.bind(this)}
                         columnCount={1}
@@ -170,17 +182,17 @@ export default class Conversation extends Component {
                         {( cellMeasurerParams ) => (
                           <List
                             height={autoSizerParams.height}
-                            ref={(ref) => { list = ref }}
+                            ref='List'
                             rowCount={messages.length}
                             rowHeight={cellMeasurerParams.getRowHeight}
                             rowRenderer={this.rowRenderer.bind(this)}
                             width={autoSizerParams.width}
+                            onRowsRendered={this.onScroll.bind(this)}
                           />
                         )}
                       </CellMeasurer>
-                    )}}
-                  </AutoSizer>
-
+                  )}}
+                </AutoSizer>
               </div>
             </CardText>
             <CardActions
